@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>$Name$</id>
+		<version>$Version$</version>
+		<authors>pragmatrix</authors>
+		<owners>pragmatrix</owners>
+		<projectUrl>https://github.com/pragmatrix/iwhen</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>iwhen, Immediate Promises for TypeScript 0.8.3</description>
+		<tags>promises promise futures async-programming asynchronous async callbacks typescript indexeddb</tags>
+		<dependencies>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="iwhen.ts" target="Content/Scripts/" />
+		<file src="iunfold.ts" target="Content/Scripts/" />
+	</files>
+</package>
