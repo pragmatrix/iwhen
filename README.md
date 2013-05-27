@@ -20,6 +20,12 @@ In IndexedDB, a transaction lives as long as new requests are initiated in respo
 If a promise library would delay the callback, the transaction may commit too early and before all the requests
 went through.
 
+## Incompatibilities to when.js
+
+- deprecated parameters were removed.
+- `iwhen.all()` is a variadic function and so does not expect arrays. To wait for multiple promises, use
+`iwhen.all(a, b)` instead of `iwhen.all([a,b])`.
+
 ## License
 
 Licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
