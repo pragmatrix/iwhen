@@ -266,9 +266,11 @@ var iwhen;
             function settle(arrayOrPromiseOfArray) {
         return _map(arrayOrPromiseOfArray, toFulfilledState, toRejectedState);
     }
+    iwhen.settle = settle;
             function map(arrayOrPromiseOfArray, mapFunc) {
         return _map(arrayOrPromiseOfArray, mapFunc);
     }
+    iwhen.map = map;
     function _map(array, mapFunc, fallback) {
         return when(array, function (array) {
             return promise(resolveMap);

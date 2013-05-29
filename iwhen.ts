@@ -519,7 +519,7 @@ module iwhen
 
 	export function settle(...array:any[]) : Promise;
 	export function settle(promiseOfArray:Promise) : Promise;
-	function settle(arrayOrPromiseOfArray: any) : Promise
+	export function settle(arrayOrPromiseOfArray: any) : Promise
 	{
 		return _map(arrayOrPromiseOfArray, toFulfilledState, toRejectedState);
 	}
@@ -535,7 +535,7 @@ module iwhen
 
 	export function map(array:any[], mapFunc: (value: any) => any) : Promise;
 	export function map(promiseOfArray:Promise, mapFunc: (value: any) => any) : Promise;
-	function map(arrayOrPromiseOfArray: any, mapFunc: (value: any) => any) : Promise
+	export function map(arrayOrPromiseOfArray: any, mapFunc: (value: any) => any) : Promise
 	{
 		return _map(arrayOrPromiseOfArray, mapFunc);
 	}
