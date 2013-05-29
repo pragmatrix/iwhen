@@ -1,6 +1,6 @@
 # iwhen, Immediate Promises
 
-This is an unfinished and untested port of [when.js](https://github.com/cujojs/when) to
+This is an unfinished port of [when.js](https://github.com/cujojs/when) to
 [typescript](http://www.typescriptlang.org/) that is specifically built to avoid delaying callbacks.
 
 In this implementation, every callback passed to the library gets either called immediately or directly from within the
@@ -9,8 +9,7 @@ context of the asynchronous function that fulfills the promise.
 This change may have consequences in several areas, like making bugs harder to reproduce, or consuming a lot of stack
 space when the fulfillment runs synchronously.
 
-But when used carefully, this library may be used for asynchronous APIs that are incompatible with the current
-promise implementations.
+But when used carefully, this library may be used for asynchronous APIs that are incompatible with current promise implementations.
 
 ## APIs that may be used with iwhen
 
