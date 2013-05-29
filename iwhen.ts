@@ -98,7 +98,7 @@ module iwhen
 		{
 			return this.then(function(array) {
 				// array may contain promises, so resolve its contents.
-				return all(array, function(array) {
+				return all.apply(undef, array).then(array => {
 					return onFulfilled.apply(undef, array);
 				});
 			});

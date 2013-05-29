@@ -25,7 +25,7 @@ var iwhen;
         };
         TrustedPromise.prototype.spread = function (onFulfilled) {
             return this.then(function (array) {
-                return all(array, function (array) {
+                return all.apply(undef, array).then(function (array) {
                     return onFulfilled.apply(undef, array);
                 });
             });
