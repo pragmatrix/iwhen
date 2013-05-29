@@ -1,5 +1,5 @@
 id=iwhen.TypeScript
-version=0.1.2-alpha
+version=0.1.3-alpha
 package=${id}.${version}.nupkg
 
 .PHONY: pushnuget
