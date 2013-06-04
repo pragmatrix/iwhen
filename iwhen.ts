@@ -605,15 +605,15 @@ module iwhen
 
 	declare function reduce(
 		promiseArray:Promise[],
-		reduceFunc:(currentValue:any, value:any, index?:number, total?:number) => any,
+		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
 		initialValue: any
 		) : Promise;
 	declare function reduce(
 		promiseOfArray:Promise,
-		reduceFunc:(currentValue:any, value:any, index?:number, total?:number) => any,
+		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
 		initialValue: any
 		) : Promise;
-	function reduce(array: any,reduceFunc:(currentValue:any, value:any, index?:number, total?:number) => any, initialValue: any): Promise
+	function reduce(array: any,reduceFunc:(currentValue:any, value:any, index:number, total:number) => any, initialValue: any): Promise
 	{
 		var args = fcall(slice, arguments, 1);
 
