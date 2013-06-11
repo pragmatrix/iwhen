@@ -603,17 +603,22 @@ module iwhen
 	 * @returns {Promise} that will resolve to the final reduced value
 	 */
 
-	declare function reduce(
+	export function reduce(
+		array:any[],
+		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
+		initialValue: any
+		) : Promise;
+	export function reduce(
 		promiseArray:Promise[],
 		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
 		initialValue: any
 		) : Promise;
-	declare function reduce(
+	export function reduce(
 		promiseOfArray:Promise,
 		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
 		initialValue: any
 		) : Promise;
-	function reduce(array: any,reduceFunc:(currentValue:any, value:any, index:number, total:number) => any, initialValue: any): Promise
+	export function reduce(promise: any,reduceFunc:(currentValue:any, value:any, index:number, total:number) => any, initialValue: any): Promise
 	{
 		var args = fcall(slice, arguments, 1);
 

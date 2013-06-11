@@ -300,7 +300,7 @@ var iwhen;
             }
         });
     }
-            function reduce(array, reduceFunc, initialValue) {
+                function reduce(promise, reduceFunc, initialValue) {
         var args = fcall(slice, arguments, 1);
         return when(promise, function (array) {
             var total;
@@ -315,6 +315,7 @@ var iwhen;
             return reduceArray.apply(array, args);
         });
     }
+    iwhen.reduce = reduce;
     function toFulfilledState(x) {
         return {
             state: 'fulfilled',
