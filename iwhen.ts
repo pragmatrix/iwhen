@@ -18,7 +18,9 @@ module iwhen
 {
 	export interface Promise
 	{
-		then : Then;
+		// need to specify then inline (not as interface Then), otherwise WebStorm would not be
+		// able to typecheck callers.
+		then(onFulfilled : (value: any) => any, onRejected?: (reason: any) => any, onNotify?: (update: any) => any) : Promise;
 		inspect(): any;
 
 		otherwise(onRejected?: (reason:any) => any) : Promise;
