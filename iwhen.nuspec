@@ -15,5 +15,6 @@
 	<files>
 		<file src="iwhen.ts" target="Content/Scripts/" />
 		<file src="iunfold.ts" target="Content/Scripts/" />
+		<file src="idelay.ts" target="Content/Scripts/" />
 	</files>
 </package>
