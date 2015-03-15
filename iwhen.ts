@@ -16,11 +16,11 @@
 
 module iwhen
 {
-	export interface Promise
+	export interface Promise<ValueT>
 	{
 		// need to specify then inline (not as interface Then), otherwise WebStorm would not be
 		// able to typecheck callers.
-		then(onFulfilled : (value: any) => any, onRejected?: (reason: any) => any, onNotify?: (update: any) => any) : Promise;
+		then<VT2>(onFulfilled : (ValueT: any) => Promise<VT2>, onRejected?: (reason: any) => any, onNotify?: (update: any) => any) : Promise<VT2>;
 		inspect(): any;
 
 		otherwise(onRejected?: (reason:any) => any) : Promise;
@@ -55,6 +55,9 @@ module iwhen
 	 *   value of callback or errback or the completion value of promiseOrValue if
 	 *   callback and/or errback is not supplied.
 	 */
+
+	export function when<ValueT, Value2T>(promise: Promise<ValueT>, onFulFilled: (value: ValueT) => Promise<Value2T>) : Promise<Value2T>;
+	export function when<ValueT, Value2T>(promise: ValueT, onFulFilled: (value: ValueT) => Promise<Value2T>) : Promise<Value2T>;
 
 	export function when(promiseOrValue : any, onFulfilled : (value: any) => any, onRejected?: (reason: any) => any, onProgress?: (update: any) => any) {
 		// Get a trusted promise for the input promiseOrValue, and then
@@ -165,14 +168,14 @@ module iwhen
 
 	export interface Resolver
 	{
-		resolve(value: any) : Promise;
-		reject(reason: any) : Promise;
+		resolve<ValueT>(value: ValueT) : Promise<ValueT>;
+		reject<ReasonT>(reason: ReasonT) : Promise<ReasonT>;
 		notify(update: any) : any;
 	}
 
-	export interface Deferred extends Resolver
+	export interface Deferred<V> extends Resolver
 	{
-		promise: Promise;
+		promise: Promise<V>;
 		resolver: Resolver;
 	}
 
@@ -503,7 +506,7 @@ module iwhen
 	 * have fulfilled, or will reject when *any one* of the input promises rejects.
 	 */
 
-	export function join(...promises:Promise[]) : Promise
+	export function join<ElementT>(...promises:Promise<ElementT>[]) : Promise<ElementT[]>
 	{
 		return _map(promises, identity);
 	}
@@ -519,8 +522,8 @@ module iwhen
 	 *  outcome snapshots for each input promise.
 	 */
 
-	export function settle(...array:any[]) : Promise;
-	export function settle(promiseOfArray:Promise) : Promise;
+	export function settle<ElementT>(...array:ElementT[]) : Promise<ElementT[]>;
+	export function settle<ElementT>(promiseOfArray:Promise<Promise<ElementT>[]>) : Promise<ElementT[]>;
 	export function settle(arrayOrPromiseOfArray: any) : Promise
 	{
 		return _map(arrayOrPromiseOfArray, toFulfilledState, toRejectedState);
@@ -535,8 +538,8 @@ module iwhen
 	 *  or reject if any input promise rejects.
 	 */
 
-	export function map(array:any[], mapFunc: (value: any) => any) : Promise;
-	export function map(promiseOfArray:Promise, mapFunc: (value: any) => any) : Promise;
+	export function map<ElementT, ResultT>(array:ElementT[], mapFunc: (value: ElementT) => ResultT) : Promise<ResultT[]>;
+	export function map<ElementT, ResultT>(promiseOfArray:Promise<ElementT>[], mapFunc: (value: ElementT) => ResultT) : Promise<ResultT[]>;
 	export function map(arrayOrPromiseOfArray: any, mapFunc: (value: any) => any) : Promise
 	{
 		return _map(arrayOrPromiseOfArray, mapFunc);
@@ -610,15 +613,15 @@ module iwhen
 		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
 		initialValue: any
 		) : Promise;
-	export function reduce(
-		promiseArray:Promise[],
-		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
+	export function reduce<ValueT, ReducedT>(
+		promiseArray:Promise<ValueT>[],
+		reduceFunc:(currentValue:ValueT, value:ValueT, index:number, total:number) => ReducedT,
 		initialValue: any
-		) : Promise;
-	export function reduce(
-		promiseOfArray:Promise,
-		reduceFunc:(currentValue:any, value:any, index:number, total:number) => any,
-		initialValue: any
+		) : Promise<ReducedT>;
+	export function reduce<ValueT, ReducedT>(
+		promiseOfArray:Promise<ValueT[]>,
+		reduceFunc:(currentValue:ValueT, value:ValueT, index:number, total:number) => ReducedT,
+		initialValue: ValueT
 		) : Promise;
 	export function reduce(promise: any,reduceFunc:(currentValue:any, value:any, index:number, total:number) => any, initialValue: any): Promise
 	{
