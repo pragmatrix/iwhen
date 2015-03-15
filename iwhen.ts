@@ -384,7 +384,7 @@ module iwhen
 	 * @returns {boolean} true if promiseOrValue is a {@link Promise}
 	 */
 
-	export function isPromise(promiseOrValue:any) : bool
+	export function isPromise(promiseOrValue:any) : boolean
 	{
 		return promiseOrValue && typeof promiseOrValue.then === 'function';
 	}
